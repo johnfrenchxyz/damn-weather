@@ -1,3 +1,36 @@
+// Determine Location
+var locationContainer = document.getElementById('locationContainer');
+var weatherContainer = document.getElementById('weatherContainer');
+
+function getLocation() {
+
+   // Show Loading Text
+   document.querySelector('button').innerHTML = "Loading...";
+
+   // Query Location or Browser Error
+   if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+   } else {
+      locationContainer.innerHTML = "Geolocation is not supported by this browser.";
+   }
+}
+
+function showPosition(position) {
+   
+   var latitude = Math.trunc(position.coords.latitude);
+   var longitude = Math.trunc(position.coords.longitude); 
+
+   locationContainer.innerHTML = "Latitude:" + latitude + '<br />' + 'Longitude:' + longitude; 
+   document.querySelector('button').style.display = 'none';
+
+   // Call the Weather API
+
+}
+
+
+
+   /*
+
 // Call the Weather API
 
 var request = new XMLHttpRequest();
@@ -16,3 +49,6 @@ request.onload = function() {
 request.onerror = function() {
    // There was a connection error
 };
+
+*/
+

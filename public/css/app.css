@@ -1,0 +1,7 @@
+#app {
+  max-width: 800px; }
+
+.weather-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
