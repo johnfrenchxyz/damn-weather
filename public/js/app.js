@@ -15,6 +15,8 @@ function getLocation() {
    }
 }
 
+getLocation();
+
 function showPosition(position) {
    
    var latitude = Math.trunc(position.coords.latitude);
@@ -24,31 +26,30 @@ function showPosition(position) {
    document.querySelector('button').style.display = 'none';
 
    // Call the Weather API
-
+   showWeather(latitude, longitude);
 }
 
 
-
-   /*
-
-// Call the Weather API
-
 var request = new XMLHttpRequest();
-request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=73d4b65d40628531a9c6341332fe4cdc', true);
 
-request.onload = function() {
-   if (this.status >= 200 && this.status < 400) {
-      // Success!
-      var data = JSON.parse(this.response);
-      console.log(data);
-   } else {
-      // Error Returned
+function showWeather(latitude, longitude) {
+   request.open('GET', 'http://api.ornweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + 
+      '&APPID=73d4b65d40628531a9c6341332fe4cdc', true);
+   
+   request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+         // Success!
+         var data = JSON.parse(this.response);
+         console.log(data);
+      }  else {
+         // Return Error
+         console.log('Something went wrong');
+      }
    }
 };
+
+showWeather(83, 24);
 
 request.onerror = function() {
    // There was a connection error
 };
-
-*/
-
