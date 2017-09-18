@@ -1,19 +1,66 @@
 // Global Variables
+const loadingContainer = document.getElementById('loading');
 const app = document.getElementById('app');
+const iconContainer = document.getElementById('icon');
+const tempContainer = document.getElementById('temp');
+const locationContainer = document.getElementById('location');
+
+var weatherData;
+
+// getJSON Vanilla JS Function
+function getJSON(url, callback) {
+   var xhr = new XMLHttpRequest();
+   xhr.open("GET", url, true);
+   xhr.onload = function (e) {
+      if (xhr.readyState === 4) {
+         if (xhr.status === 200) {
+            var res = xhr.responseText;
+            callback(JSON.parse(res));
+         } else { 
+            console.error(xhr.statusText);
+         } 
+      }
+   }; 
+   xhr.onerror = function (e) {
+      console.error(xhr.statusText);
+   };  
+   xhr.send(null);
+}
 
 // Get the User's Location
 function getLocation() {
    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getWeather);
-      app.innerHTML = 'Loading...';
+      loadingContainer.innerHTML = 'Loading...';
    } else {
       app.innerHTML = "Geolocation is not supported by this browser.";
    }
 }
 
-getLocation();
+// Configure Messages
+function damnMessage(temp) {
+   var message;
+   if (temp < 32) {
+      message =  'It\'s below damn freezing. Wear some damn layers.';
+   } else if (temp >= 32 && temp <= 60) {
+      message = 'Pretty damn chilly. Grab a sweater or a damn coat.';
+   } else if (temp >= 60 && temp <= 75) {
+      message = 'It\'s about damn perfect. Get off your phone.';
+   } else if (temp >= 75 && temp <= 85) {
+      message = 'Pretty damn warm. Plan accordingly.';
+   } else if (temp >= 85) {
+      message = 'It\'s damn hot. Wear shorts.';
+   }
 
+   // Append the message
+   document.getElementById('message').innerHTML = message;
+}
+
+// Get the Weather & Display
 function getWeather(position) {
+
+   // Remove Loading Indicator
+   loadingContainer.style.display = 'none';
 
    // Coordinates
    var latitude = position.coords.latitude;
@@ -32,36 +79,26 @@ function getWeather(position) {
       return Math.trunc(tempInF);
    }
 
-   getJSON(apiURL, function(weatherInfo) {
-      console.log(weatherInfo);
-      app.innerHTML = weatherInfo.name + ', ' + weatherInfo.weather[0].description + ', ' + kelvinToFahrenheit(weatherInfo.main.temp);
+   // Get Data
+   getJSON(apiURL, function(data) {
+
+      var temp = kelvinToFahrenheit(data.main.temp);
+
+      // Render Weather Icon/Status
+      iconContainer.innerHTML = data.weather[0].description;
+      // Render Temp
+      tempContainer.innerHTML = temp;
+      // Render Location
+      locationContainer.innerHTML = data.name;
+
+      // Message
+      damnMessage(temp);
    });
-   
-
 }
 
 
-// getJSON Vanilla JS Function
-// ---------------------------
 
-function getJSON(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.onload = function (e) {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-	            var res = xhr.responseText;
-                callback(JSON.parse(res));
-            } else { 
-                console.error(xhr.statusText);
-            } 
-        }
-          
-    };
-    
-    xhr.onerror = function (e) {
-      console.error(xhr.statusText);
-    }; 
-    
-    xhr.send(null);
-}
+// Run it!
+// -------
+
+getLocation();
