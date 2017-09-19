@@ -5,6 +5,7 @@ const iconContainer = document.getElementById('icon');
 const statusContainer = document.getElementById('status');
 const tempContainer = document.getElementById('temp');
 const locationContainer = document.getElementById('location');
+const messageContainer = document.getElementById('message');
 
 var weatherData;
 
@@ -38,8 +39,7 @@ function getLocation() {
    }
 }
 
-
-// Configure Messages
+// Configure Messages Based on Current Temp
 function damnMessage(temp) {
    var message;
    if (temp < 32) {
@@ -54,26 +54,26 @@ function damnMessage(temp) {
       message = 'It\'s damn hot. Wear shorts.';
    }
 
-   // Append the message
-   document.getElementById('message').innerHTML = message;
+   return message;
 }
 
 
-// Configure Icons
-function damnIcon(status) {
-   var icon;
-   if (status.includes('cloud') === true) {
-      icon = 'cloudy';
-   } else if (status.includes('rain')) {
-      icon = 'rainy';
-   } else if (status.includes('storm')) {
-      icon = 'stormy';
-   } else {
-      icon = 'sunny';
-   }
-
-   // Append the icon
-   iconContainer.src = './img/' + icon + '.svg'
+// Configure Icons Based on Weather Status Text
+function damnIcon(iconTest) {
+      var icon;
+      
+      if (iconTest.includes('cloud') === true) {
+         icon = 'cloudy';
+      } else if (iconTest.includes('rain')) {
+         icon = 'rainy';
+      } else if (iconTest.includes('storm')) {
+         icon = 'stormy';
+      } else {
+         icon = 'sunny';
+      }
+      
+      // Append the Correct Icon
+      iconContainer.src = './img/' + icon + '.svg';
 }
 
 // Status Cleanup (Fixing Capitalization From API)
@@ -111,25 +111,26 @@ function getWeather(position) {
    getJSON(apiURL, function(data) {
 
       var temp = kelvinToFahrenheit(data.main.temp);
-      var status = data.weather[0].description; 
+      var status = data.weather[0].description;
 
-      // Render Weather Icon
-      damnIcon(status);
-      // Render Weather Status
-      statusContainer.innerHTML = statusCleanup(status);
       // Render Temp
       tempContainer.innerHTML = temp;
+
       // Render Location
       locationContainer.innerHTML = data.name;
 
-      // Message
-      damnMessage(temp);
+      // Combined Weather Status & Damn Message
+      status = statusCleanup(status);
+      message = damnMessage(temp);
+      messageContainer.innerHTML = status + '. ' + message;
+
+      // Combine Status & Message for damnIcon Function
+      var iconTest = status + ' ' + message;
+      
+      // Run the Icon Check
+      damnIcon(iconTest);
    });
 }
 
-
-
-// Run it!
-// -------
-
+// Run the App!
 getLocation();
