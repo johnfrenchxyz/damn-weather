@@ -76,6 +76,13 @@ function damnIcon(status) {
    iconContainer.src = './img/' + icon + '.svg'
 }
 
+// Status Cleanup (Fixing Capitalization From API)
+function statusCleanup(status) {
+   status = status.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+   });
+   return status;
+}
 
 // Get the Weather & Display
 function getWeather(position) {
@@ -108,9 +115,8 @@ function getWeather(position) {
 
       // Render Weather Icon
       damnIcon(status);
-      // iconContainer.innerHTML
       // Render Weather Status
-      statusContainer.innerHTML = status;
+      statusContainer.innerHTML = statusCleanup(status);
       // Render Temp
       tempContainer.innerHTML = temp;
       // Render Location
