@@ -2,6 +2,7 @@
 const loadingContainer = document.getElementById('loading');
 const app = document.getElementById('app');
 const iconContainer = document.getElementById('icon');
+const statusContainer = document.getElementById('status');
 const tempContainer = document.getElementById('temp');
 const locationContainer = document.getElementById('location');
 
@@ -37,6 +38,7 @@ function getLocation() {
    }
 }
 
+
 // Configure Messages
 function damnMessage(temp) {
    var message;
@@ -55,6 +57,25 @@ function damnMessage(temp) {
    // Append the message
    document.getElementById('message').innerHTML = message;
 }
+
+
+// Configure Icons
+function damnIcon(status) {
+   var icon;
+   if (status.includes('cloud') === true) {
+      icon = 'cloudy';
+   } else if (status.includes('rain')) {
+      icon = 'rainy';
+   } else if (status.includes('storm')) {
+      icon = 'stormy';
+   } else {
+      icon = 'sunny';
+   }
+
+   // Append the icon
+   iconContainer.src = './img/' + icon + '.svg'
+}
+
 
 // Get the Weather & Display
 function getWeather(position) {
@@ -83,9 +104,13 @@ function getWeather(position) {
    getJSON(apiURL, function(data) {
 
       var temp = kelvinToFahrenheit(data.main.temp);
+      var status = data.weather[0].description; 
 
-      // Render Weather Icon/Status
-      iconContainer.innerHTML = data.weather[0].description;
+      // Render Weather Icon
+      damnIcon(status);
+      // iconContainer.innerHTML
+      // Render Weather Status
+      statusContainer.innerHTML = status;
       // Render Temp
       tempContainer.innerHTML = temp;
       // Render Location
