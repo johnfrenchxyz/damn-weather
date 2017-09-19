@@ -114,7 +114,7 @@ function getWeather(position) {
       var status = data.weather[0].description;
 
       // Render Temp
-      tempContainer.innerHTML = temp;
+      tempContainer.innerHTML = temp + '&#176;';
 
       // Render Location
       locationContainer.innerHTML = data.name;
