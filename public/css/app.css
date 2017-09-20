@@ -1,11 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700");
+* {
+  margin: 0; }
+
+body {
+  background: #73497D;
+  background: -webkit-linear-gradient(left top, #FA9292, #73497D);
+  background: -o-linear-gradient(bottom right, #FA9292, #73497D);
+  background: -moz-linear-gradient(bottom right, #FA9292, #73497D);
+  background: linear-gradient(to bottom right, #FA9292, #73497D);
+  width: 100vw;
+  height: 100vh; }
+
+h1, h2, h3, h4, h5, h5, p, span, div, a {
+  font-family: "Montserrat", "Helvetica", sans-serif;
+  color: #ffffff;
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
+
 #app {
-  max-width: 800px; }
+  height: 95%;
+  margin: 1em; }
+  #app #message {
+    margin-top: 5rem;
+    font-size: 2rem; }
 
 .weather-indicator {
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: center; }
+  .weather-indicator .top-bar {
+    width: 33%;
+    text-align: center; }
 
 #icon {
   max-width: 100px;
   min-width: 50px; }
+  @media (min-width: 0px) and (max-width: 639px) {
+    #icon {
+      max-width: 75px; } }
+
+#temp {
+  font-size: 3rem; }
