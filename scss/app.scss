@@ -5,6 +5,15 @@ $pink: #FA9292;
 $purple: #73497D;
 $white: #ffffff;
 
+// Breakpoints 
+// -----------
+
+$phone: "(min-width: 0px) and (max-width: 639px)";
+$mobile-nav: "(min-width: 0px) and (max-width: 903px)";
+$mobile-nav-up: "(min-width: 904px)";
+$tablet: "(min-width: 640px) and (max-width: 1023px)";
+$desktop: "(min-width: 1024px)";
+
 // Body Sizing & Style
 // -------------------
 
@@ -47,7 +56,12 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
 }
 
 #app {
+   height: 95%;
    margin: 1em;
+   #message {
+      margin-top: 5rem;
+      font-size: 2rem;
+   }
 }
 
 .weather-indicator {
@@ -61,8 +75,12 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
 }
 
 #icon {
-   max-width: 300px;
+   max-width: 100px;
    min-width: 50px;
+   // Small Screens
+   @media #{$phone} {
+      max-width: 75px;
+   }
 }
 
 #temp {

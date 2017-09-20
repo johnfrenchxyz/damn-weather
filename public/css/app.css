@@ -17,7 +17,11 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
   text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
 
 #app {
+  height: 95%;
   margin: 1em; }
+  #app #message {
+    margin-top: 5rem;
+    font-size: 2rem; }
 
 .weather-indicator {
   display: flex;
@@ -28,8 +32,11 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
     text-align: center; }
 
 #icon {
-  max-width: 300px;
+  max-width: 100px;
   min-width: 50px; }
+  @media (min-width: 0px) and (max-width: 639px) {
+    #icon {
+      max-width: 75px; } }
 
 #temp {
   font-size: 3rem; }
