@@ -33,7 +33,6 @@ function getJSON(url, callback) {
 function getLocation() {
    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getWeather);
-      loadingContainer.innerHTML = 'Loading...';
    } else {
       app.innerHTML = "Geolocation is not supported by this browser.";
    }
