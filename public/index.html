@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Damn Weather</title>
+      <link rel="stylesheet" href="./css/app.css" />
+   </head>
+   <body>
+      <!-- Loading Container -->
+      <div id="loading">
+        <div class="showbox">
+           <div class="loader">
+              <svg class="circular" viewBox="25 25 50 50">
+                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+              </svg>
+           </div>
+        </div> 
+      </div>
+      <div id="app">
+         <div class="weather-indicator">
+            <div class="top-bar">
+               <div><img id="icon" src="" /></div>
+               <div id="status"></div>
+            </div>
+            <div id="temp" class="top-bar"></div>
+            <div id="location" class="top-bar"></div>
+         </div>
+         <div id="message"></div>
+      </div>
+
+      <!--<div id="message"></div>-->
+
+      <!-- Scripts -->
+      <script src="./js/app.js"></script>
+   </body>
+</html>

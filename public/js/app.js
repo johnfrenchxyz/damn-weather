@@ -94,7 +94,7 @@ function getWeather(position) {
    var longitude = position.coords.longitude;
 
    // API URL Construction
-   var apiBaseURL = 'http://api.openweathermap.org/data/2.5/weather?';
+   var apiBaseURL = 'https://api.openweathermap.org/data/2.5/weather?';
    var latURL = 'lat=' + latitude;
    var lonURL = '&lon=' + longitude;
    var apiKey = '&appid=f27c35340d03585589cd7538556323fc';
