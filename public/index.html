@@ -11,12 +11,12 @@
       <meta name="apple-mobile-web-app-status-bar-style" content="#fa9292">
       <meta name="theme-color" content="#FA9292">
       <meta name="mobile-web-app-capable" content="yes">
-      <link rel="apple-touch-icon" sizes="180x180" href="https://www.johnfrench.xyz/damnweather/apple-touch-icon.png">
-      <link rel="icon" type="image/png" sizes="192x192" href="https://www.johnfrench.xyz/damnweather/android-chrome-192x192.png">
-      <link rel="icon" type="image/png" sizes="32x32" href="https://www.johnfrench.xyz/damnweather/favicon-32x32.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="https://www.johnfrench.xyz/damnweather/favicon-16x16.png">
-      <link rel="mask-icon" href="https://www.johnfrench.xyz/damnweather/safari-pinned-tab.svg" color="#D37D8C">
-      <link rel="manifest" href="https://www.johnfrench.xyz/damnweather/manifest.json" />
+      <link rel="apple-touch-icon" sizes="180x180" href="https://www.johnfrench.xyz/damnweather/icons/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="https://www.johnfrench.xyz/damnweather/icons/android-chrome-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="https://www.johnfrench.xyz/damnweather/icons/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="https://www.johnfrench.xyz/damnweather/icons/favicon-16x16.png">
+      <link rel="mask-icon" href="https://www.johnfrench.xyz/damnweather/icons/safari-pinned-tab.svg" color="#D37D8C">
+      <link rel="manifest" href="https://www.johnfrench.xyz/damnweather/icons/manifest.json" />
 
       <link rel="stylesheet" href="./css/app.css" />
    </head>
@@ -31,6 +31,14 @@
            </div>
         </div> 
       </div>
+	  <!-- Error Container -->
+	  <div id="errorContainer"></div>
+	  <!-- Fallback Container -->
+	  	<div id="fallbackContainer">
+		  <form id="zipcodeForm" onsubmit="return makeSearch()">
+		  	<input type="number" id="zipcode" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" placeholder="Enter Your Zip" />
+		  </form>
+	  	</div>
       <div id="app">
          <div class="weather-indicator">
             <div class="top-bar">
