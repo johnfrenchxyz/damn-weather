@@ -1,0 +1,6 @@
+{
+	"extends": "happiness",
+	"globals": {
+		"alert": true
+	}
+}
