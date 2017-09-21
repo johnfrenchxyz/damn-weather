@@ -1,3 +1,8 @@
+// Lint Declarations
+// -----------------
+
+/*jslint es6 browser:true */
+
 // Global Variables
 const loadingContainer = document.getElementById('loading');
 const app = document.getElementById('app');
@@ -6,7 +11,6 @@ const statusContainer = document.getElementById('status');
 const tempContainer = document.getElementById('temp');
 const locationContainer = document.getElementById('location');
 const messageContainer = document.getElementById('message');
-
 var weatherData;
 
 // getJSON Vanilla JS Function
@@ -14,8 +18,8 @@ function getJSON(url, callback) {
    var xhr = new XMLHttpRequest();
    xhr.open("GET", url, true);
    xhr.onload = function (e) {
-      if (xhr.readyState === 4) {
-         if (xhr.status === 200) {
+        if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
             var res = xhr.responseText;
             callback(JSON.parse(res));
          } else { 
