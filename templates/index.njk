@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <title>Damn Weather</title>
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name ="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
       <meta name="description" content="A damn app to give you the damn weather.">
       <meta name="apple-mobile-web-app-title" content="Damn Weather">
       <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,34 +21,43 @@
       <link rel="stylesheet" href="./css/app.css" />
    </head>
    <body>
-      <!-- Loading Container -->
-      <div id="loading">
-        <div class="showbox">
-           <div class="loader">
-              <svg class="circular" viewBox="25 25 50 50">
-                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-              </svg>
-           </div>
-        </div> 
-      </div>
-	  <!-- Error Container -->
-	  <div id="errorContainer"></div>
-	  <!-- Fallback Container -->
-	  	<div id="fallbackContainer">
-		  <form id="zipcodeForm">
-		  	<input type="number" id="zipcode" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" placeholder="Enter Your Zip" />
-		  </form>
-	  	</div>
-      <div id="app">
-         <div class="weather-indicator">
-            <div class="top-bar">
-               <div><img id="icon" src="" /></div>
-               <div id="status"></div>
-            </div>
-            <div id="temp" class="top-bar"></div>
-            <div id="location" class="top-bar"></div>
-         </div>
-         <div id="message"></div>
+	   <!-- Loading Container -->
+	   <div id="loading">
+		   <div class="showbox">
+			   <div class="loader">
+				   <svg class="circular" viewBox="25 25 50 50">
+					   <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+					</svg>
+				</div>
+			</div> 
+		</div>
+		<div id="fallbackFlex">
+			<h1 id="title">Damn.</h1>
+			<!-- Error Container -->
+	  		<div id="errorContainer"></div>
+	  		<!-- Fallback Container -->
+	 	 	<div id="fallbackContainer">
+				  <form id="zipcodeForm" onsubmit="return makeSearch()">
+					  <label for="zipcode">Enter Your Zipcode</label>
+					  <input type="number" id="zipcode" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" placeholder="Ex: '30683'" autofocus />
+					  <input type="submit" value="Submit" />
+				  </form>
+			</div>
+		</div>
+		<!-- Application Container -->
+		<div id="app">
+			<div class="weather-indicator">
+				<!-- Weather Icon -->
+				<div class="top-bar">
+					<div><img id="icon" src="" /></div>
+            	</div>
+				<!-- Temperature -->
+            	<div id="temp" class="top-bar"></div>
+				<!-- Location -->
+            	<div id="location" class="top-bar"></div>
+         	</div>
+			<!-- Message --> 
+         	<div id="message"></div>
       </div>
 
       <!-- Scripts -->
