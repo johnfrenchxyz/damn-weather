@@ -32,14 +32,14 @@
 			</div> 
 		</div>
 		<div id="fallbackFlex">
-			<h1>Damn.</h1>
+			<h1 id="title">Damn.</h1>
 			<!-- Error Container -->
 	  		<div id="errorContainer"></div>
 	  		<!-- Fallback Container -->
 	 	 	<div id="fallbackContainer">
 				  <form id="zipcodeForm" onsubmit="return makeSearch()">
 					  <label for="zipcode">Enter Your Zipcode</label>
-					  <input type="number" id="zipcode" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" placeholder="Ex: '30683'" />
+					  <input type="number" id="zipcode" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" placeholder="Ex: '30683'" autofocus />
 					  <input type="submit" value="Submit" />
 				  </form>
 			</div>
