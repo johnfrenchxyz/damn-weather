@@ -7,6 +7,7 @@ const locationContainer = document.getElementById('location');
 const messageContainer = document.getElementById('message');
 const fallbackContainer = document.getElementById('fallbackContainer');
 const errorContainer = document.getElementById('errorContainer');
+const fallbackFlex = document.getElementById('fallbackFlex');
 var XMLHttpRequest;
 
 // getJSON Vanilla JS Function
@@ -34,9 +35,18 @@ function getLocation () {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(getWeather, showError);
 	} else {
-		errorContainer.innerHTML = 'Geolocation is not supported by this browser.';
+		// Hide Loading Contaienr
+		loadingContainer.style.display = 'none';
+		// Error Message
+		errorContainer.innerHTML = 'Looks like you\'re browser isn\'t supporting geolocation. Enter your zipcode to get the weather.';
+		// Zip Code Entry Fallback
 		requestZip();
 	}
+}
+
+// Function to Hide the Loading Container
+function hideLoadingContainer () {
+	loadingContainer.style.display = 'none';
 }
 
 // Geolocation Fallback - Error Handling
@@ -44,14 +54,14 @@ function showError (error) {
 	var x = errorContainer;
 
 	// Hide the Loader
-	loadingContainer.style.display = 'none';
+	hideLoadingContainer();
 
 	// Show the Fallback Container
 	requestZip();
 
 	switch (error.code) {
 		case error.PERMISSION_DENIED:
-			x.innerHTML = 'User denied the request for Geolocation.';
+			x.innerHTML = 'If you don\'t want to share your location, you can still enter your zip below to check the damn weather.';
 			break;
 		case error.POSITION_UNAVAILABLE:
 			x.innerHTML = 'Location information is unavailable.';
@@ -67,13 +77,13 @@ function showError (error) {
 
 // Geolocation Fallback - Display Zip
 function requestZip () {
+	document.getElementById('title').style.display = 'block';
 	fallbackContainer.style.display = 'block';
 }
 
 // Geolocation Fallback - Form Submit to API
 document.getElementById('zipcodeForm').onsubmit = function (event) {
 	event.preventDefault();
-
 	var zipcode = document.getElementById('zipcode').value;
 	getWeatherZip(zipcode);
 };
@@ -129,8 +139,15 @@ function kelvinToFahrenheit (tempInK) {
 
 // Get the Weather & Display (Based on Coordinates)
 function getWeather (position) {
-	// Remove Loading Indicator
-	loadingContainer.style.display = 'none';
+
+	// Hide h1
+	document.getElementById('title').style.display = 'none';
+
+	// Hide Loading Indicator
+	hideLoadingContainer();
+
+	// Hide Fallback Container
+	fallbackFlex.style.display = 'none';
 
 	// Coordinates
 	var latitude = position.coords.latitude;
@@ -171,10 +188,13 @@ function getWeather (position) {
 // Get the Weather & Display (Based on Zipcode)
 function getWeatherZip (zip) {
 	// Remove Zipcode Form
-	fallbackContainer.style.display = 'none';
+	fallbackFlex.style.display = 'none';
 
 	// Remove Error Container
 	errorContainer.style.display = 'none';
+
+	// Hide Loading Container
+	hideLoadingContainer();
 
 	// API URL Construction
 	var apiBaseURL = 'https://api.openweathermap.org/data/2.5/weather?';

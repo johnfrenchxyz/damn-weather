@@ -4,6 +4,7 @@
 $pink: #FA9292;
 $purple: #73497D;
 $white: #ffffff;
+$dark-gray: #303030;
 
 // Breakpoints 
 // -----------
@@ -14,11 +15,23 @@ $mobile-nav-up: "(min-width: 904px)";
 $tablet: "(min-width: 640px) and (max-width: 1023px)";
 $desktop: "(min-width: 1024px)";
 
+// Mixins
+// ------
+
+// Row Mixin
+@mixin row () {
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 .5em 0 .5em;
+  }
+
 // Body Sizing & Style
 // -------------------
 
 * {
    margin: 0;
+   border: none;
 }
 
 body {
@@ -32,27 +45,32 @@ body {
    background: -moz-linear-gradient(bottom right, $pink, $purple);
    // Standard Syntax
    background: linear-gradient(to bottom right, $pink, $purple);
-   
-   // Sizing
+
    width: 100vw;
    height: 100vh;
+   max-height: 100%;
+   max-width: 100%;
+   overflow-y: hidden;
 }
 
 // Typography
 // ----------
 
 // Montserrat
-@import url('https://fonts.googleapis.com/css?family=Montserrat:700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 // Font Variables
 $default-font: 'Montserrat', 'Helvetica', sans-serif;
 $default-font-color: $white;
-$default-text-shadow: 0px 3px 6px rgba(0, 0, 0, .16); 
+$default-text-shadow: 0px 3px 6px rgba(0, 0, 0, .16);
 
 h1, h2, h3, h4, h5, h5, p, span, div, a {
    font-family: $default-font;
    color: $default-font-color;
-   text-shadow: $default-text-shadow;
+}
+
+h1 {
+	text-shadow: $default-text-shadow;
 }
 
 #app {
@@ -60,7 +78,9 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
    margin: 1em;
    #message {
       margin-top: 5rem;
-      font-size: 2rem;
+	  font-size: 2rem;
+	  font-weight: bold;
+	  text-shadow: $default-text-shadow;
    }
 }
 
@@ -85,21 +105,103 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
 
 #temp {
    font-size: 3rem;
+   font-weight: bold;
+   text-shadow: $default-text-shadow;
+}
+
+#location {
+	font-weight: bold;
+	text-shadow: $default-text-shadow;
+}
+
+#fallbackFlex {
+	@include row();
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 2em;
+	text-align: center;
+	h1 {
+		display: none;
+		margin-bottom: .5em;
+	}
 }
 
 #errorContainer {
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	font-size: .8rem;
+	margin: 1em 0 1em 0;
+	text-align: left;
 }
 
 #fallbackContainer {
 	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	width: 100%;
+}
+
+// Form Styling
+// ------------
+
+form {
+	margin: 1em 0 1em 0;
+	display: block;
+	// background: green;
+	width: 100%;
+}
+
+// Label Variables
+$label-color: $default-font-color;
+
+// Label Styles
+label {
+	display: block;
+	margin: 0 0 .5em 0;
+	font-size: .8rem;
+	color: $label-color;
+	text-align: left;
+}
+
+// Input Variables
+$input-color: $dark-gray;
+
+// Input Styles
+input[type="number"] {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	outline: none;
+	padding: 1em;
+	font-size: 1.2em;
+	font-weight: bold;
+	border-radius: .3em;
+	color: $dark-gray;
+}
+
+// Submit Variables
+$submit-bg: $dark-gray;
+
+// Submit 
+input[type="submit"] {
+	margin: .5em 0 0 0;
+	background: $submit-bg;
+	color: $white;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	outline: none;
+	padding: 1em;
+	font-size: 1.2em;
+	font-weight: bold;
+	border-radius: .3em;
+	cursor: pointer;
+	transition: 180ms ease background;
+	&:hover {
+		background: darken($submit-bg, 5%);
+	}
 }
 
 // Loading SVG
@@ -108,17 +210,22 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
 $width: 100px;
 
 .showbox {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 5%;
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   padding: 5%;
+display: flex;
+align-content: center;
+justify-content: center;
+max-width: $width;
 }
 
 .loader {
-  position: relative;
-  margin: 50% auto;
+//   position: relative;
+  width: $width;
+  margin: 0 auto 0 auto;
   width: $width;
   &:before {
     content: '';
@@ -129,9 +236,11 @@ $width: 100px;
 
 .circular {
   animation: rotate 2s linear infinite;
-  height: 100%;
+//   height: 100%;
+width: $width;
+height: $width;
   transform-origin: center center;
-  width: 100%;
+//   width: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
