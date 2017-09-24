@@ -73,6 +73,12 @@ h1 {
 	text-shadow: $default-text-shadow;
 }
 
+// Link Styles
+
+a {
+	text-decoration: none;
+}
+
 #app {
    height: 95%;
    margin: 1em;
@@ -201,6 +207,20 @@ input[type="submit"] {
 	transition: 180ms ease background;
 	&:hover {
 		background: darken($submit-bg, 5%);
+	}
+}
+
+// Credits Section
+// ---------------
+
+.credits {
+	display: none;
+	justify-content: space-between;
+	margin-top: 2em;
+	text-align: left;
+	font-size: .8rem;
+	a:hover {
+		text-decoration: underline;
 	}
 }
 
