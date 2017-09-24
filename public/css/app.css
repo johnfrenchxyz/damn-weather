@@ -22,6 +22,9 @@ h1, h2, h3, h4, h5, h5, p, span, div, a {
 h1 {
   text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
 
+a {
+  text-decoration: none; }
+
 #app {
   height: 95%;
   margin: 1em; }
@@ -122,6 +125,15 @@ input[type="submit"] {
   transition: 180ms ease background; }
   input[type="submit"]:hover {
     background: #232323; }
+
+.credits {
+  display: none;
+  justify-content: space-between;
+  margin-top: 2em;
+  text-align: left;
+  font-size: .8rem; }
+  .credits a:hover {
+    text-decoration: underline; }
 
 .showbox {
   display: flex;

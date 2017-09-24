@@ -8,6 +8,7 @@ const messageContainer = document.getElementById('message');
 const fallbackContainer = document.getElementById('fallbackContainer');
 const errorContainer = document.getElementById('errorContainer');
 const fallbackFlex = document.getElementById('fallbackFlex');
+const creditsContainer = document.querySelector('.credits');
 var XMLHttpRequest;
 
 // getJSON Vanilla JS Function
@@ -148,6 +149,9 @@ function getWeather (position) {
 
 	// Hide Fallback Container
 	fallbackFlex.style.display = 'none';
+
+	// Show Credits Container
+	creditsContainer.style.display = 'flex';
 
 	// Coordinates
 	var latitude = position.coords.latitude;
